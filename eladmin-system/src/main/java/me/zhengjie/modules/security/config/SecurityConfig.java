@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // 密码加密方式
+        // 密码加密方式 PasswordEncoderFactories
         return new BCryptPasswordEncoder();
     }
 
@@ -85,8 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 // 授权异常
                 .exceptionHandling()
-                .authenticationEntryPoint(authenticationErrorHandler)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .authenticationEntryPoint(authenticationErrorHandler) //401
+                .accessDeniedHandler(jwtAccessDeniedHandler) //403
                 // 防止iframe 造成跨域
                 .and()
                 .headers()
